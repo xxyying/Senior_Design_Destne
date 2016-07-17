@@ -1,0 +1,31 @@
+! Primitives List 
+name=v9scope field_type=1 len=4 semantics=raw
+name=dscp field_type=195 len=1 semantics=u_int
+name=flowdir field_type=61 len=1 semantics=u_int
+name=tcpwinsize field_type=186 len=2 semantics=u_int
+!Application Table
+name=appname field_type=96 len=24 semantics=str
+name=appid field_type=95 len=4 semantics=raw
+name=appdescr field_type=94 len=55 semantics=str
+name=subapptag field_type=97 len=4 semantics=u_int
+name=subappname field_type=109 len=80 semantics=str
+name=subappdescr field_type=110 len=80 semantics=str
+name=appcat field_type=45000 len=32 semantics=raw
+name=appsubcat field_type=45001 len=32 semantics=raw
+name=appgroup field_type=45002 len=32 semantics=raw
+!Interface Table
+name=ifname field_type=82 len=32 semantics=str
+name=ifdescr field_type=83 len=64 semantics=str
+!MACE
+name=artrtmax field_type=42072 len=4 semantics=u_int
+name=artcndsum field_type=42084 len=4 semantics=u_int
+name=artsndsum field_type=42087 len=4 semantics=u_int
+name=rtpssrc field_type=37022 len=4 semantics=u_int
+name=pktlossrt field_type=37021 len=4 semantics=u_int
+name=rtpjittmn field_type=37023 len=4 semantics=u_int
+name=rtpjittmx field_type=37025 len=4 semantics=u_int
+name=rtppldtyp field_type=37041 len=1 semantics=u_int
+name=medbytert field_type=37006 len=4 semantics=u_int
+name=sysupfrst field_type=22 len=4 semantics=u_int
+name=sysuplast field_type=21 len=4 semantics=u_int
+!

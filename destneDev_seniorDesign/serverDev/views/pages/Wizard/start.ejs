@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title><%= title %></title>
+  <link rel="icon" href="/static/images/favicon.ico" type="image/x-icon"/>
+  <!-- All the css that is required -->
+  <link rel="stylesheet" href="/static/vendors/stylesheets/font-awesome.css">
+  <link rel="stylesheet" href="/static/vendors/stylesheets/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="/static/styles/master.css">
+</head>
+
+<body>
+  <header>
+    <% include ../../partials/header %>
+  </header>
+
+<div class="jumbotron">
+	<div class="container">
+		<div class="row">
+			<h1>Wizard <i class="fa fa-bolt"></i></h1>
+			<h2>Welcome to Destne!</h2>
+		</div>
+	</div>
+</div>
+
+<div class="container">
+  <p class="lead">Howdy! </p>
+
+  <p>This step-by-step walkthrough will guide you through the process of setting up the Destne collection device as well as the data exporter.</p>
+
+  <p>Here's a quick preview of what we will set up.</p>
+
+  <div class="well">
+  <ol>
+		<li>Adding Users</li>
+    <li>Router Configuration</li>
+    <li>Collector Configuration</li>
+		<li>Network Interfaces Configuration</li>
+  </ol>
+  </div>
+</div>
+
+<div class="container">
+  <p align="center">Ready to start?</p>
+	<div class="text-center">
+		<a href="/wizard/addUsers" class="btn btn-lg btn-success">
+			Begin <i class="fa fa-arrow-circle-right"></i>
+		</a>
+	</div>
+</div>
+
+<footer>
+	<% include ../../partials/footer%>
+</footer>
+
+<!-- JS Files Required -->
+<script src="/static/vendors/js/jquery-1.11.1.min.js"></script>
+<script src="/static/vendors/js/bootstrap.min.js"></script>
+</body>
+</html>

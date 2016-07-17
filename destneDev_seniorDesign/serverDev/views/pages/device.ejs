@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title><%= title %></title>
+    <link rel="icon" href="/static/images/favicon.ico" type="image/x-icon"/>
+  <!-- All the css that is required -->
+  <link rel="stylesheet" href="/static/vendors/stylesheets/font-awesome.css">
+  <link rel="stylesheet" href="/static/vendors/stylesheets/bootstrap.min.css">
+  <link rel="stylesheet" href="/static/vendors/stylesheets/c3.min.css">
+  <link rel="stylesheet" type="text/css" href="/static/styles/master.css">
+</head>
+
+<body>
+  <header>
+    <% include ../partials/header %>
+  </header>
+
+  <div class="jumbotron">
+    <div class="container">
+      <h1>Device Management</h1>
+      <p>Configure settings on your Destne Device</p>
+    </div>
+  </div>
+
+  <a name="devicePanel"></a>
+  <div class="container">
+    <div class="panel panel-default">
+      <div class="panel-heading panel-heading-tabbed clearfix">
+        <ul class="nav nav-tabs panel-tabs panel-title pull-left">
+          <li role="presentation" class="active">
+            <a href="#deviceStatus" aria-controls="deviceStatus" role="tab" data-toggle="tab"><i class="fa fa-desktop"></i> Device Status</a>
+          </li>
+          <li role="presentation">
+            <a href="#deviceConfigure" aria-controls="deviceConfigure" role="tab" data-toggle="tab"><i class="fa fa-cog"></i> Configure Device</a>
+          </li>
+          <li role="presentation">
+            <a href="#deviceHelp" aria-controls="deviceHelp" role="tab" data-toggle="tab"><i class="fa fa-question-circle"></i> Help</a>
+          </li>
+        </ul>
+        <div class="pull-right">
+          <a title="Refresh" id="refresh-heartbeat" class="btn btn-primary btn"><i class="fa fa-refresh"></i></a>
+        </div>
+      </div>
+      <div class="panel-body">
+        <div class="tab-content">
+          <!-- Device Status Tab -->
+          <div role="tabpanel" class="tab-pane active fade in" id="deviceStatus">
+            <div class="row">
+              <div class="col-md-6">
+                <h4>System</h4>
+                <table class="table table-responsive">
+                  <tr>
+                    <th class="col-xs-6">Hostname</th>
+                    <td class="col-xs-6" id="systemHostname"></td>
+                  </tr>
+                  <tr>
+                    <th class="col-xs-6">Operating System</th>
+                    <td class="col-xs-6" id="systemKernel"></td>
+                  </tr>
+                  <tr>
+                    <th class="col-xs-6">Kernel Version</th>
+                    <td class="col-xs-6" id="systemOs"></td>
+                  </tr>
+                  <tr>
+                    <th class="col-xs-6">Node.js Version</th>
+                    <td class="col-xs-6" id="systemPhpVersion"></td>
+                  </tr>
+                  <tr>
+                    <th class="col-xs-6">System Uptime</th>
+                    <td class="col-xs-6"id="systemUptime"></td>
+                  </tr>
+                </table>
+                <h4>CPU</h3>
+                  <table class="table table-responsive">
+                    <tr>
+                      <th class="col-xs-6">1-minute average load</th>
+                      <td class="col-xs-6" id="cpuAvgLoadMin1"></td>
+                    </tr>
+                    <tr>
+                      <th class="col-xs-6">5-minute average load</th>
+                      <td class="col-xs-6" id="cpuAvgLoadMin5"></td>
+                    </tr>
+                    <tr>
+                      <th class="col-xs-6">15-minute average load</th>
+                      <td class="col-xs-6" id="cpuAvgLoadMin15"></td>
+                    </tr>
+                  </table>
+                </div>
+                <div class="col-md-6">
+                  <h4>Storage</h4>
+                  <div class='row'>
+                    <div id="storageChart" class='text-center col-xs-4'>
+                    </div>
+                    <div class="col-xs-8">
+                      <table class="table table-responsive">
+                        <tr>
+                          <th class="col-xs-6">Free Storage</th>
+                          <td class="col-xs-6" id="storageAvail"></td>
+                        </tr>
+                        <tr>
+                          <th class="col-xs-6">Used Storage</th>
+                          <td class="col-xs-6"id="storageUsed"></td>
+                        </tr>
+                        <tr class="active">
+                          <th class="col-xs-6">Total Storage Capacity</th>
+                          <td class="col-xs-6" id="storageSize"></td>
+                        </tr>
+                      </table>
+                    </div>
+                  </div>
+                  <h4>Memory</h4>
+                  <div class="row">
+                    <div id="memoryChart" class='text-center col-xs-4'>
+                    </div>
+                    <div class="col-xs-8">
+                      <table class="table table-responsive">
+                        <tr>
+                          <th class="col-xs-4">Free memory</th>
+                          <td  class="col-xs-4" id="memoryFree"></td>
+                        </tr>
+                        <tr>
+                          <th class="col-xs-4">Used memory</th>
+                          <td  class="col-xs-4" id="memoryUsed"></td>
+                        </tr>
+                        <tr class="active">
+                          <th class="col-xs-4">Total memory</th>
+                          <td class="col-xs-4" id="memoryTotal"></td>
+                        </tr>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Device Configuration Tab -->
+            <div role="tabpanel" class="tab-pane fade" id="deviceConfigure">
+              <h3>Remote Access</h3>
+              <p>Available for hands on configuration of the Destne machine</p>
+              <button type="button" class="btn btn-default"><i class="fa fa-refresh"></i> SSH</button>
+              <hr>
+              <h3> Device Power Controls</h3>
+              <p>Gracefully restart or poweroff the Destne device</p>
+              <button type="button" id="restartButton" class="btn btn-warning"><i class="fa fa-refresh"></i> Restart</button>
+              <button type="button" id="offButton" class="btn btn-danger"><i class="fa fa-power-off"></i> Power-off</button>
+              <div class="alert" role="alert" id="powerInfo" style="display: none;">
+              </div>
+            </div>
+
+            <!-- Device Help Tab -->
+            <div role="tabpanel" class="tab-pane fade" id="deviceHelp">
+              <h4><strong>Device Status</strong></h4>
+              <h5><em>System</em></h5>
+              <ul>
+                  <li>Hostname - The name given to the destne device</li>
+                  <li>Operating System - The version and identity of the destne OS</li>
+                  <li>Kernel Version - The name of the OS distribution (currently Ubuntu Linux)</li>
+                  <li>Node.js Version - The version of Node.js that is running the server for destne</li>
+                  <li>System Uptime - The length of time since the destne device has last been reset</li>
+              </ul>
+              <h5><em>CPU</em></h5>
+              <ul>
+                <li>The load averages measure system activity and the target numbers should be less than the
+                  number of logical CPUs in the system</li>
+              </ul>
+              <h5><em>Storage</em></h5>
+              <ul>
+                <li>Storage in this instance refers to the space at the root file system (typically '/')</li>
+              </ul>
+              <h5><em>Memory</em></h5>
+              <ul>
+                <li>Memory refers to the amount of RAM currently available and being used by the device</li>
+              </ul>
+              <h4><strong>Configure Device</strong></h4>
+              <h5><em>Remote Access</em></h5>
+              <ul>
+                <li>Remote access is currently not configured but will allow for various forms of access to the
+                server (like SSH or Telnet)</li>
+              </ul>
+              <h5><em>Device Power Controls</em></h5>
+              <ul>
+                <li>The power controls allowed for the device are to restart or turn off the device
+                  however if the device is powered off via the client it will have to be manually powered back on</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <a name="networkInterfacePanel"></a>
+    <div class="container">
+      <div class="panel panel-default">
+        <div class="panel-heading panel-heading-tabbed clearfix">
+          <ul class="nav nav-tabs panel-tabs panel-title pull-left">
+            <li role="presentation" class="active">
+              <a href="#networkInterfaceStatus" aria-controls="networkInterfaceStatus" role="tab" data-toggle="tab"><i class="fa fa-signal"></i> Network Interface Status</a>
+            </li>
+            <li role="presentation">
+              <a href="#configureNetworkInterface" aria-controls="configureNetworkInterface" role="tab" data-toggle="tab"><i class="fa fa-cog"></i> Configure Network Interface</a>
+            </li>
+            <li role="presentation">
+              <a href="#networkInterfaceHelp" aria-controls="networkInterfaceHelp" role="tab" data-toggle="tab"><i class="fa fa-question-circle"></i> Help</a>
+            </li>
+          </ul>
+          <div class="pull-right">
+            <a title="Refresh" id="refresh-netheartbeat" class="btn btn-primary btn"><i class="fa fa-refresh"></i></a>
+          </div>
+        </div>
+        <div class="panel-body">
+          <div class="tab-content">
+            <!-- Network interface status-->
+            <div role="tabpanel" class="tab-pane active" id="networkInterfaceStatus">
+              <div class="col-xs-12">
+                <div class="row">
+                  <div class="alert alert-warning" id="dhcpWarning" style="display: none;">
+                    <i class='fa fa-exclamation-triangle'></i>
+                    <strong> Warning!</strong> We strongly recommend setting a static IP for destne
+                  </div>
+                  <h4>Addresses</h4>
+                    <table class="table table-responsive">
+                      <tr>
+                        <th class="col-xs-6">Network Type</th>
+                        <td class="col-xs-6" id="netType"></td>
+                      <tr>
+                        <th class="col-xs-6">IP Address</th>
+                        <td class="col-xs-6" id="ipAddress"></td>
+                      </tr>
+                      <tr>
+                        <th class="col-xs-6">Netmask</th>
+                        <td class="col-xs-6" id="netmask"></td>
+                      </tr>
+                      <tr>
+                        <th class="col-xs-6">Gateway</th>
+                        <td class="col-xs-6" id="gateway"></td>
+                      </tr>
+                    </table>
+                  </div>
+                  <div class="row" id="dnsrow">
+                    <h4>DNS</h3>
+                      <table class="table table-responsive">
+                        <tr>
+                          <th class="col-xs-6">Primary DNS Server</th>
+                          <td class="col-xs-6" id="dnsServer"></td>
+                        </tr>
+                        <tr>
+                          <th class="col-xs-6">Alternate DNS Server</th>
+                          <td class="col-xs-6" id="altdnsServer"></td>
+                        </tr>
+                      </table>
+                  </div>
+                </div>
+              </div>
+          <!-- Configure Network Interface -->
+          <div role="tabpanel" class="tab-pane" id="configureNetworkInterface">
+            <form role="form" id="netConfigForm">
+              <div class="alert" role="alert" id="netConfigWarning" style="display: none;">
+              </div>
+              <div class="checkbox">
+                <label><input type="checkbox" id="networkInterfaceDhcpStatus" value=""}>
+                  Use automatic network configuration (DHCP)
+                </label>
+              </div>
+              <div class="form-group has-feedback">
+                <label class="control-label" for="ipaddress">IP Address (IPv4):</label>
+                <input type="text" class="form-control" id="ipaddress" name="ipaddress">
+                <span class="glyphicon form-control-feedback" id="ipaddressicon"></span>
+              </div>
+              <div class="form-group has-feedback">
+                <label class="control-label" for="netmask">Netmask:</label>
+                <input type="text" class="form-control" id="netmask" name="netmask">
+                <span class="glyphicon form-control-feedback" id="netmaskicon"></span>
+              </div>
+              <div class="form-group has-feedback">
+                <label class="control-label" for="network">Network:</label>
+                <input type="text" class="form-control" id="network" name="network">
+                <span class="glyphicon form-control-feedback" id="networkicon"></span>
+              </div>
+              <div class="form-group has-feedback">
+                <label class="control-label" for="gateway">Gateway:</label>
+                <input type="text" class="form-control" id="gateway" name="gateway">
+                <span class="glyphicon form-control-feedback" id="gatewayicon"></span>
+              </div>
+              <div class="form-group has-feedback">
+                <label class="control-label" for="nameserver1">Primary DNS Server:</label>
+                <input type="text" class="form-control" id="nameserver1" name="nameserver1">
+                <span class="glyphicon form-control-feedback" id="nameserver1icon"></span>
+              </div>
+              <div class="form-group has-feedback">
+                <label class="control-label" for="nameserver2">Alternate DNS Server:</label>
+                <input type="text" class="form-control" id="nameserver2" name="nameserver2">
+                <span class="glyphicon form-control-feedback" id="nameserver2icon"></span>
+              </div>
+              <div class="text-center">
+                <button type="reset" id="networkInterfaceReset" name="networkInterface[reset]" class="btn btn-default">
+                  <i class="fa fa-undo"></i> Clear
+                </button>
+                <button type="submit" id="networkInterfaceSave" name="networkInterface[save]" class="btn btn-danger">
+                  <i class="fa fa-floppy-o"></i> Save Network Configuration
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Network Interface Help -->
+          <div role="tabpanel" class="tab-pane" id="networkInterfaceHelp">
+            <h4><strong>Overview</strong></h4>
+            <p>This panel displays the network information for the server of destne.
+              In the Network Interface Status tab, the current network setup for the device
+              is shown as well as the current first two DNS Servers being used.</p>
+
+            <p>In the Configure Network Interface tab, the device can be configured to use
+              DHCP or static IP addresses and each field can be defined before being sent to
+              the server. Note that this will bring the network down on the device for a short
+              period of roughly a minute and if the information is invalid the device will have
+              to manually be reset or configured with admin privileges.</p>
+
+            <p><i>Each field only accepts a valid IPv4 address which comes in the form of four
+               octets of xxx.xxx.xxx.xxx</i></p>
+            <h4><strong>Fields</strong></h4>
+            <h5><em>Network Type</em></h5>
+            <ul>
+                <li>Static - Recommended type for destne, allows for consistent IP information
+                each time destne is accessed</li>
+                <li>DHCP - Not recommended for destne, allows for a dyanmic configuration that can
+                often allow for quick and easy configuration although has no guarantee of consistent
+                IP address</li>
+            </ul>
+            <h5><em>IP Address</em></h5>
+            <ul>
+              <li>The IP is the unique address which the server can be accessed by. Note that if the
+                server is behind a router then there may have to be additional configuration on the
+                routing device. IPv4 is currently supported for this field, not IPv6
+              </li>
+            </ul>
+            <h5><em>Netmask</em></h5>
+            <ul>
+              <li>The netmask is used to specify subnets and avaialble hosts on the network.
+                The standard value for the netmask is 255.255.255.0
+              </li>
+            </ul>
+            <h5><em>Network</em></h5>
+            <ul>
+              <li>This address is used to specify the address of the subnet itself. Typically this value
+                is the same value as the IP however the last octet is replaced with a '0'
+              </li>
+            </ul>
+            <h5><em>Gateway</em></h5>
+            <ul>
+              <li>The gateway acts as the stepping point between two networks. An example of this stepping
+                point would be the IP address of the router which is the connector between the local network
+                and the other networks it is connected to. The typical value for the gateway is the IP with
+                the last octet replaced with a '1'
+              </li>
+            </ul>
+            <h5><em>DNS Servers</em></h5>
+            <ul>
+              <li>
+                The DNS Servers are used to translate urls to their corresponding IP Addresses.
+                Two example DNS Servers hosted by Google are 8.8.8.8 and 8.8.4.4 however any address can
+                be put here and these will be the primary two used by the device
+              </li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <% include ../partials/footer%>
+  </footer>
+
+  <!-- JS Files Required -->
+  <script src="/static/vendors/js/jquery-1.11.1.min.js"></script>
+  <script src="/static/vendors/js/jquery.validate.min.js"></script>
+  <script src="/static/vendors/js/additional-methods.min.js"></script>
+  <script src="/static/vendors/js/bootstrap.min.js"></script>
+  <script src="/static/vendors/js/d3.min.js"></script>
+  <script src="/static/vendors/js/c3.min.js"></script>
+  <script src="/static/scripts/device.js"></script>
+</body>
+</html>

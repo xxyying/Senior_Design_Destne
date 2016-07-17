@@ -1,0 +1,71 @@
+{
+  "disallowArrowFunctions": true,
+  "disallowEmptyBlocks": true,
+  "disallowMixedSpacesAndTabs": true,
+  "disallowMultipleLineBreaks": true,
+  "disallowMultipleLineStrings": true,
+  "disallowMultipleSpaces": {"allowEOLComments": true},
+  "disallowNewlineBeforeBlockStatements": true,
+  "disallowSpaceAfterLineComment": true,
+  "disallowSpaceAfterObjectKeys": true,
+  "disallowSpaceAfterPrefixUnaryOperators": true,
+  "disallowSpaceBeforeComma": true,
+  "disallowSpaceBeforePostfixUnaryOperators": true,
+  "disallowSpaceBeforeSemicolon": true,
+  "disallowSpacesInAnonymousFunctionExpression": {
+    "beforeOpeningRoundBrace": true
+  },
+  "disallowSpacesInCallExpression": true,
+  "disallowSpacesInFunctionDeclaration": {
+    "beforeOpeningRoundBrace": true
+  },
+  "disallowSpacesInFunction": {
+    "beforeOpeningRoundBrace": true
+  },
+  "disallowSpacesInNamedFunctionExpression": {
+      "beforeOpeningRoundBrace": true
+  },
+  "disallowSpacesInsideArrayBrackets": true,
+  "disallowSpacesInsideObjectBrackets": "nested",
+  "disallowSpacesInsideParentheses": true,
+  "disallowTrailingComma": true,
+  "disallowTrailingWhitespace": true,
+  "disallowYodaConditions": true,
+  "requireAlignedMultilineParams": true,
+  "requireBlocksOnNewline": 1,
+  "requireCamelCaseOrUpperCaseIdentifiers": "ignoreProperties",
+  "requireCommaBeforeLineBreak": true,
+  "requireCurlyBraces": [
+    "if",
+    "else",
+    "for",
+    "while",
+    "do",
+    "try",
+    "catch"
+],
+"requireKeywordsOnNewLine": ["else"],
+"requireOperatorBeforeLineBreak": true,
+"requireSemicolons": true,
+"requireSpaceAfterBinaryOperators": true,
+"requireSpaceAfterComma": true,
+"requireSpaceBeforeKeywords": [
+    "if",
+    "else",
+    "for",
+    "while",
+    "do",
+    "switch",
+    "case",
+    "return",
+    "try",
+    "catch",
+],
+"requireSpaceBeforeBinaryOperators": true,
+"requireSpaceBeforeBlockStatements": 1,
+"requireSpaceBetweenArguments": true,
+"requireSpacesInConditionalExpression": true,
+"requireSpacesInForStatement": true,
+"validateIndentation": 2,
+"validateQuoteMarks": { "mark": "'", "escape": true}
+}

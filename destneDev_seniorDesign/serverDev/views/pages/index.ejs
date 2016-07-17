@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title><%= title %></title>
+    <link rel="icon" href="/static/images/favicon.ico" type="image/x-icon"/>
+  <!-- All the css that is required -->
+  <link rel="stylesheet" href="/static/vendors/stylesheets/font-awesome.css">
+  <link rel="stylesheet" href="/static/vendors/stylesheets/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="/static/styles/master.css">
+</head>
+
+<body>
+  <header>
+    <% include ../partials/header %>
+  </header>
+
+    <div class="jumbotron text-center">
+      <div class="container">
+        <h1>Welcome to destne!</h1>
+      </div>
+    </div>
+
+    <div class="container">
+      <h2 class="lead">What is the <b>Destination Network Evaluator</b>?</h2>
+      <p>A network analyzer as a low-cost solution that will monitor specific network metrics, store
+         historical data, and generate comprehensive reports that can be used to inform the user of their
+         WAN utilization. Destne is designed to be usable regardless of technical background and have a
+         simple but effective interface. More advanced options are available for custom queries and
+         in-depth analytics to optimize destne for the best possible experience.
+      </p>
+      <h2 class="lead">What do we provide?</h2>
+      <h4><b>Analytic Interface</b></h4>
+      <p>The lightweight interface available on the destne client can visualize your network in a variety
+         of different ways. Graphs are customizable in different formats and can be printed or saved
+         for use in different formats. Tables and raw data are available for further analysis to help
+         identify issues within your network and improve quality of service or find troublesome applications.
+      </p>
+      <p>Some of the default analytics that can be run on your NetFlow collected data are:
+      </p>
+      <div class="container">
+        <dt>Top Applications</dt>
+        <dd>Displays the applications that have used the most network traffic</dd>
+        <dt>Bytes per Hour</dt>
+        <dd>Shows the total number of bytes per hour being used for all applications</dd>
+        <dt>Protocol Distribution</dt>
+        <dd>Shows the protocol distribution across all interfaces (i.e. TCP, FTP, etc.)</dd>
+      </div>
+      <h4><b>Web API</b></h4>
+      <p>If you want to get into the more advanced functions of destne or possibly create your own client
+         for commercial purposes, a RESTful API is available to work with. All API functions exist under
+         our <a href="/api/"> API Routes</a>. Documentation for using the Web API is also avaiable on our
+         <a href="http://localhost:4567"> documentation page</a>.
+      </p>
+      <h4><b>Customer Configuration</b></h4>
+      <p>Destne is also customizable before deployment in a variety of ways. One of the key features is the
+         ability to choose which data is collected on your network. Some examples of available types are:
+         ports, IP addresses, protocol, application name, and many more. Another key configuration option
+         is to set the usernames, passwords, and roles for those that can access your destne application.
+      </p>
+    </div>
+
+  <footer>
+    <% include ../partials/footer%>
+  </footer>
+
+  <!-- JS Files Required -->
+  <script src="/static/vendors/js/jquery-1.11.1.min.js"></script>
+  <script src="/static/vendors/js/bootstrap.min.js"></script>
+</body>
+</html>

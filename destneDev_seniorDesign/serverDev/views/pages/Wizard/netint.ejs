@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title><%= title %></title>
+  <link rel="icon" href="/static/images/favicon.ico" type="image/x-icon"/>
+  <!-- All the css that is required -->
+  <link rel="stylesheet" href="/static/vendors/stylesheets/font-awesome.css">
+  <link rel="stylesheet" href="/static/vendors/stylesheets/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="/static/styles/master.css">
+</head>
+
+<body>
+  <header>
+    <% include ../../partials/header %>
+  </header>
+
+<div class="jumbotron">
+	<div class="container">
+		<div class="row">
+			<h1>Wizard <i class="fa fa-bolt"></i></h1>
+			<h2>Network Interface Configuration</h2></div>
+		</div>
+	</div>
+  <div class="container">
+    <p align="justify">
+      Here, you will setup the various parameters used to network your device with your existing
+      infrastructure. Chances are that the device is currently using a DHCP leased IP Address.
+      This IP address is the same address that is displayed on the physical appliance when the NIC
+      is connected to an Access Switch. If you are on a virtual appliance, this IP address will be
+      displayed in the Management>Device section.
+    </p>
+  </div>
+    <a name="networkInterfacePanel"></a>
+    <div class="container">
+      <div class="panel panel-default">
+        <div class="panel-heading panel-heading-tabbed clearfix">
+          <ul class="nav nav-tabs panel-tabs panel-title pull-left">
+            <li role="presentation" class="active">
+              <a href="#networkInterfaceStatus" aria-controls="networkInterfaceStatus" role="tab" data-toggle="tab"><i class="fa fa-signal"></i> Network Interface Status</a>
+            </li>
+            <li role="presentation">
+              <a href="#configureNetworkInterface" aria-controls="configureNetworkInterface" role="tab" data-toggle="tab"><i class="fa fa-cog"></i> Configure Network Interface</a>
+            </li>
+            <li role="presentation">
+              <a href="#networkInterfaceHelp" aria-controls="networkInterfaceHelp" role="tab" data-toggle="tab"><i class="fa fa-question-circle"></i> Help</a>
+            </li>
+          </ul>
+          <div class="pull-right">
+            <a title="Refresh" id="refresh-netheartbeat" class="btn btn-primary btn"><i class="fa fa-refresh"></i></a>
+          </div>
+        </div>
+        <div class="panel-body">
+          <div class="tab-content">
+            <!-- Network interface status-->
+            <div role="tabpanel" class="tab-pane active" id="networkInterfaceStatus">
+              <div class="col-xs-12">
+                <div class="row">
+                  <div class="alert alert-warning" id="dhcpWarning" style="display: none;">
+                    <i class='fa fa-exclamation-triangle'></i>
+                    <strong> Warning!</strong> We strongly recommend setting a static IP for destne
+                  </div>
+                  <h4>Addresses</h4>
+                    <table class="table table-responsive">
+                      <tr>
+                        <th class="col-xs-6">Network Type</th>
+                        <td class="col-xs-6" id="netType"></td>
+                      <tr>
+                        <th class="col-xs-6">IP Address</th>
+                        <td class="col-xs-6" id="ipAddress"></td>
+                      </tr>
+                      <tr>
+                        <th class="col-xs-6">Netmask</th>
+                        <td class="col-xs-6" id="netmask"></td>
+                      </tr>
+                      <tr>
+                        <th class="col-xs-6">Gateway</th>
+                        <td class="col-xs-6" id="gateway"></td>
+                      </tr>
+                    </table>
+                  </div>
+                  <div class="row" id="dnsrow">
+                    <h4>DNS</h3>
+                      <table class="table table-responsive">
+                        <tr>
+                          <th class="col-xs-6">Primary DNS Server</th>
+                          <td class="col-xs-6" id="dnsServer"></td>
+                        </tr>
+                        <tr>
+                          <th class="col-xs-6">Alternate DNS Server</th>
+                          <td class="col-xs-6" id="altdnsServer"></td>
+                        </tr>
+                      </table>
+                  </div>
+                </div>
+              </div>
+          <!-- Configure Network Interface -->
+          <div role="tabpanel" class="tab-pane" id="configureNetworkInterface">
+            <form role="form" id="netConfigForm">
+              <div class="alert" role="alert" id="netConfigWarning" style="display: none;">
+              </div>
+              <div class="checkbox">
+                <label><input type="checkbox" id="networkInterfaceDhcpStatus" value=""}>
+                  Use automatic network configuration (DHCP)
+                </label>
+              </div>
+              <div class="form-group has-feedback">
+                <label class="control-label" for="ipaddress">IP Address (IPv4):</label>
+                <input type="text" class="form-control" id="ipaddress" name="ipaddress">
+                <span class="glyphicon form-control-feedback" id="ipaddressicon"></span>
+              </div>
+              <div class="form-group has-feedback">
+                <label class="control-label" for="netmask">Netmask:</label>
+                <input type="text" class="form-control" id="netmask" name="netmask">
+                <span class="glyphicon form-control-feedback" id="netmaskicon"></span>
+              </div>
+              <div class="form-group has-feedback">
+                <label class="control-label" for="network">Network:</label>
+                <input type="text" class="form-control" id="network" name="network">
+                <span class="glyphicon form-control-feedback" id="networkicon"></span>
+              </div>
+              <div class="form-group has-feedback">
+                <label class="control-label" for="gateway">Gateway:</label>
+                <input type="text" class="form-control" id="gateway" name="gateway">
+                <span class="glyphicon form-control-feedback" id="gatewayicon"></span>
+              </div>
+              <div class="form-group has-feedback">
+                <label class="control-label" for="nameserver1">Primary DNS Server:</label>
+                <input type="text" class="form-control" id="nameserver1" name="nameserver1">
+                <span class="glyphicon form-control-feedback" id="nameserver1icon"></span>
+              </div>
+              <div class="form-group has-feedback">
+                <label class="control-label" for="nameserver2">Alternate DNS Server:</label>
+                <input type="text" class="form-control" id="nameserver2" name="nameserver2">
+                <span class="glyphicon form-control-feedback" id="nameserver2icon"></span>
+              </div>
+              <div class="text-center">
+                <button type="reset" id="networkInterfaceReset" name="networkInterface[reset]" class="btn btn-default">
+                  <i class="fa fa-undo"></i> Clear
+                </button>
+                <button type="submit" id="networkInterfaceSave" name="networkInterface[save]" class="btn btn-danger">
+                  <i class="fa fa-floppy-o"></i> Save Network Configuration
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Network Interface Help -->
+          <div role="tabpanel" class="tab-pane" id="networkInterfaceHelp">
+            <h4><strong>Overview</strong></h4>
+            <p>This panel displays the network information for the server of destne.
+              In the Network Interface Status tab, the current network setup for the device
+              is shown as well as the current first two DNS Servers being used.</p>
+
+            <p>In the Configure Network Interface tab, the device can be configured to use
+              DHCP or static IP addresses and each field can be defined before being sent to
+              the server. Note that this will bring the network down on the device for a short
+              period of roughly a minute and if the information is invalid the device will have
+              to manually be reset or configured with admin privileges.</p>
+
+            <p><i>Each field only accepts a valid IPv4 address which comes in the form of four
+               octets of xxx.xxx.xxx.xxx</i></p>
+            <h4><strong>Fields</strong></h4>
+            <h5><em>Network Type</em></h5>
+            <ul>
+                <li>Static - Recommended type for destne, allows for consistent IP information
+                each time destne is accessed</li>
+                <li>DHCP - Not recommended for destne, allows for a dyanmic configuration that can
+                often allow for quick and easy configuration although has no guarantee of consistent
+                IP address</li>
+            </ul>
+            <h5><em>IP Address</em></h5>
+            <ul>
+              <li>The IP is the unique address which the server can be accessed by. Note that if the
+                server is behind a router then there may have to be additional configuration on the
+                routing device. IPv4 is currently supported for this field, not IPv6
+              </li>
+            </ul>
+            <h5><em>Netmask</em></h5>
+            <ul>
+              <li>The netmask is used to specify subnets and avaialble hosts on the network.
+                The standard value for the netmask is 255.255.255.0
+              </li>
+            </ul>
+            <h5><em>Network</em></h5>
+            <ul>
+              <li>This address is used to specify the address of the subnet itself. Typically this value
+                is the same value as the IP however the last octet is replaced with a '0'
+              </li>
+            </ul>
+            <h5><em>Gateway</em></h5>
+            <ul>
+              <li>The gateway acts as the stepping point between two networks. An example of this stepping
+                point would be the IP address of the router which is the connector between the local network
+                and the other networks it is connected to. The typical value for the gateway is the IP with
+                the last octet replaced with a '1'
+              </li>
+            </ul>
+            <h5><em>DNS Servers</em></h5>
+            <ul>
+              <li>
+                The DNS Servers are used to translate urls to their corresponding IP Addresses.
+                Two example DNS Servers hosted by Google are 8.8.8.8 and 8.8.4.4 however any address can
+                be put here and these will be the primary two used by the device
+              </li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <div class="container">
+      <a href="/wizard/collector" class="btn btn-lg btn-default pull-left"><i class="fa fa-arrow-circle-left"></i> Go Back</a>
+      <a href="/wizard/finish" class="btn btn-lg btn-success pull-right">Continue <i class="fa fa-arrow-circle-right"></i></a>
+    </div>
+
+		<footer>
+	    <% include ../../partials/footer%>
+	  </footer>
+
+	  <!-- JS Files Required -->
+	  <script src="/static/vendors/js/jquery-1.11.1.min.js"></script>
+	  <script src="/static/vendors/js/jquery.validate.min.js"></script>
+	  <script src="/static/vendors/js/additional-methods.min.js"></script>
+	  <script src="/static/vendors/js/bootstrap.min.js"></script>
+    <script src="/static/scripts/Wizard/netint.js"></script>
+	</body>
+	</html>

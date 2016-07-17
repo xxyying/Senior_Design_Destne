@@ -1,0 +1,55 @@
+<!-- views/html/header.ejs -->
+<nav class="navbar-inverse navbar-static-top" role="navigation">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/"><img alt="destne Logo" height="23px" src="/static/images/destne_logo_white.svg"></a>
+    </div>
+
+    <div id="navbar" class="collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+        <li class="<%= (title === "Home") ? "active" : '' %>"><a href="/">Home</a></li>
+        <li class="<%= (title === "Analysis") ? "active" : '' %>"><a href="/client/analysis">Analysis</a></li>
+        <%if (user !== null) {%>
+        <%if (user.role.indexOf("Administrator") != -1) {%>
+          <li class="<%= (title === "Management") ? "active" : '' %>">
+            <a class="dropdown-toggle" data-toggle="dropdown" role="button" aira-haspopup="true" aria-expanded="false">Management <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="/client/manage-device"><i class="fa fa-server"></i> Device</a></li>
+              <li><a href="/client/manage-collector"><i class="fa fa-database"></i>  Collector</a></li>
+              <li><a href="/client/select-guardian"><i class="fa fa-user"></i> Guardians</a></li>
+            </ul>
+        </li>
+        <% }} %>
+        <li class="<%= (title === "About") ? "active" : '' %>"><a href="/about">About</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <%if (user === null) {%>
+          <li>
+            <a href="/auth" role="button">
+              <i class="fa fa-user" style="padding-right:5px"></i>Sign In</a>
+          </li>
+        <% } else { %>
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspop="true" aria-expanded="false">
+              <i class="fa fa-user" style="padding-right:5px"></i><span id="usrName"><%= user.username %></span><span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                  <%if (user.role.indexOf("Administrator") != -1) {%>
+                    <li><a href="/wizard"><i class="fa fa-bolt"></i> Wizard</a></li>
+                    <li><a href="/client/manage-guardian/<%=user.userId%>"><i class="fa fa-user"></i> My Profile</a></li>
+                  <% } %>
+                  <li><a href="/signout"><i class="fa fa-sign-out"></i> Logout</a></li>
+                  <li role="separator" class="divider"></li>
+                  <li role="presentation" class="dropdown-header">destne v1.1</li>
+                </ul>
+          </li>
+        <% } %>
+      </ul>
+  	</div>
+	</div>
+</nav>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title><%= title %></title>
+  <link rel="icon" href="/static/images/favicon.ico" type="image/x-icon"/>
+  <!-- All the css that is required -->
+  <link rel="stylesheet" href="/static/vendors/stylesheets/font-awesome.css">
+  <link rel="stylesheet" href="/static/vendors/stylesheets/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="/static/styles/master.css">
+</head>
+
+<body>
+  <header>
+    <% include ../partials/header %>
+  </header>
+
+  <div class="jumbotron">
+    <div class="container text-left">
+      <h1>Edit Guardian</h1>
+      <p>Changing profile information for Guardian <strong id="trgtUsername"><%= targetUser.username %></strong></p>
+      <span id="trgtUserId" style="display: none;"><%=targetUser.userId %></span>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="well">
+      <div id="changeGuardianInfo" class="alert" style="display: none;">
+      </div>
+      <div id="changeGuardian">
+          <!-- REQUIRED FIELDS -->
+          <ul class="list-unstyled">
+            <form role="form" id="changeGuardianForm">
+              <li>
+                <div class="form-group has-feedback">
+                  <label class="control-label user" id="currentUsername" for="guardianUsername">Current Username: </label>
+                  <input type="text" class="form-control" id="guardianUsername" name="guardianUsername">
+                </div>
+                <div class="row">
+                  <div class="col-xs-6 form-group has-feedback">
+                    <label class="control-label" for="guardianPassword">New Password</label>
+                    <input type="password" class="form-control" id="guardianPassword" name="guardianPassword">
+                  </div>
+                  <div class="col-xs-6 form-group has-feedback">
+                    <label class="control-label" for="guardianPassword2">Repeat Password</label>
+                    <input type="password" class="form-control" id="guardianPassword2" name="guardianPassword2">
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="row">
+                  <div class="col-xs-6 form-group has-feedback">
+                    <label class="control-label" id="currentFirstname" for="guardianFirstname">Current First Name: </label>
+                    <input type="text" class="form-control nameGroup" id="guardianFirstname" name="guardianFirstname">
+                  </div>
+                  <div class="col-xs-6 form-group has-feedback">
+                    <label class="control-label" id="currentLastname" for="guardianLastname">Current Last Name: </label>
+                    <input type="text" class="form-control nameGroup" id="guardianLastname" name="guardianLastname">
+                  </div>
+                </div>
+                <div class="form-group has-feedback">
+                  <label class="control-label" id="currentEmail" for="guardianEmail">Current Email: </label>
+                  <input type="text" class="form-control" id="guardianEmail" name="guardianEmail">
+                </div>
+              </li>
+              <hr>
+              <br>
+              <li>
+                <p><strong>Current Roles Assigned</strong></p>
+                <div id="assignedRoles">
+                </div>
+              </li>
+              <hr>
+              <br>
+              <li>
+                <p><strong>Unassigned Roles</strong></p>
+                <div id="unassignedRoles">
+                </div>
+              </li>
+              <br>
+              <br>
+              <li>
+                <p class="text-center">
+                  <button type="reset" id="guardianReset" name="guardianReset" class="btn btn-default">
+                    <i class="fa fa-undo"></i> Reset
+                  </button>
+
+                  <button type="submit" id="guardianSave" name="guardianSave" class="btn btn-warning">
+                    <i class="fa fa-floppy-o"></i> Save Changes
+                  </button>
+                </p>
+              </li>
+              <li>
+                <p class="text-center">
+                  <a class="btn btn-default" href="/client/select-guardian"><i class="fa fa-users"></i> Manage Other Guardians</a>
+                </p>
+              </li>
+            </form>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+
+    <footer>
+      <% include ../partials/footer%>
+    </footer>
+
+    <!-- JS Files Required -->
+    <script src="/static/vendors/js/jquery-1.11.1.min.js"></script>
+    <script src="/static/vendors/js/jquery.validate.min.js"></script>
+    <script src="/static/vendors/js/additional-methods.min.js"></script>
+    <script src="/static/vendors/js/bootstrap.min.js"></script>
+    <script src="/static/scripts/manage-guardian.js"></script>
+  </body>
+  </html>

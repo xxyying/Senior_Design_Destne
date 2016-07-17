@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title><%= title %></title>
+  <link rel="icon" href="/static/images/favicon.ico" type="image/x-icon"/>
+  <!-- All the css that is required -->
+  <link rel="stylesheet" href="/static/vendors/stylesheets/font-awesome.css">
+  <link rel="stylesheet" href="/static/vendors/stylesheets/bootstrap.min.css">
+  <link rel="stylesheet" href="/static/vendors/stylesheets/c3.min.css">
+  <link rel="stylesheet" type="text/css" href="/static/styles/master.css">
+</head>
+
+<body>
+  <header>
+    <% include ../partials/header %>
+  </header>
+
+  <div class="jumbotron text-center">
+    <div class="container">
+      <h1>Analysis</h1>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="panel panel-default">
+      <div class="panel-heading panel-heading-tabbed clearfix">
+        <ul class="nav nav-tabs panel-tabs panel-title pull-left">
+          <li role="presentation" class="active">
+            <a href="#overview" aria-controls="overview" role="tab" data-toggle="tab"><i class="fa fa-dashboard"></i> Overview</a>
+          </li>
+          <li role="presentation">
+            <a href="#egress" aria-controls="egress" role="tab" data-toggle="tab"><i class="fa fa-upload"></i> Egress</a>
+          </li>
+          <li role="presentation">
+            <a href="#ingress" aria-controls="ingress" role="tab" data-toggle="tab"><i class="fa fa-download"></i> Ingress</a>
+          </li>
+          <li role="presentation">
+            <a href="#help" aria-controls="help" role="tab" data-toggle="tab"><i class="fa fa-question-circle"></i> Help</a>
+          </li>
+        </ul>
+        <div class="pull-right">
+          <!-- <a title="Download PDF" id="pdf" class="btn btn-default"><i class="fa fa-pdf"></i> Download PDF</a> -->
+          <a title="Print" id="print" class="btn btn-default"><i class="fa fa-print"></i> Print View</a>
+          <a title="Refresh" id="refresh-dataset" class="btn btn-primary"><i class="fa fa-refresh"></i></a>
+        </div>
+      </div>
+
+      <div class="panel-body dataset">
+        <div class="tab-content">
+          <!-- OVERVIEW TAB -->
+          <div role="tabpanel" class="tab-pane active fade in" id="overview">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="panel panel-default">
+                  <div class="panel-heading"><i class="fa fa-pie-chart"></i> Protocol Distribution</div>
+                  <div class="panel-body dataset" id="total-protocol-distribution">
+                      <div id="protocolChart" class='text-center'>
+                        <div class="alert alert-info">
+                          <p><i class="fa fa-exclamation-triangle"></i>
+                            We are getting your custom analytics from destne, please wait a moment....
+                          </p>
+                        </div>
+                      </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="panel panel-default">
+                  <div class="panel-heading"><i class="fa fa-bar-chart"></i> Average Packet Size</div>
+                  <div class="panel-body dataset" id="avg-packet-size">
+                    <div id="avgPacketChart" class='text-center'>
+                      <div class="alert alert-info">
+                        <p><i class="fa fa-exclamation-triangle"></i>
+                          We are getting your custom analytics from destne, please wait a moment....
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- EGRESS TAB -->
+          <div role="tabpanel" class="tab-pane fade" id="egress">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="panel panel-default">
+                  <div class="panel-heading"><i class="fa fa-table"></i> Egress Application Summary</div>
+                  <div class="panel-body dataset" id="egress-application-summary">
+                    <div id="egressSummaryChart" class='text-center'>
+                      <div class="alert alert-info">
+                        <p><i class="fa fa-exclamation-triangle"></i>
+                          We are getting your custom analytics from destne, please wait a moment....
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="panel panel-default">
+                  <div class="panel-heading"><i class="fa fa-bar-chart"></i> Egress Top Talkers</div>
+                  <div class="panel-body dataset" id="egress-top-talkers">
+                    <div id="egressTopTalkerChart" class='text-center'>
+                      <div class="alert alert-info">
+                        <p><i class="fa fa-exclamation-triangle"></i>
+                          We are getting your custom analytics from destne, please wait a moment....
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="panel panel-default">
+                  <div class="panel-heading"><i class="fa fa-line-chart"></i> Egress Bytes per Hour</div>
+                  <div class="panel-body dataset" id="egress-bytes-per-hour">
+                    <div id="egressBPHChart" class='text-center'>
+                      <div class="alert alert-info">
+                        <p><i class="fa fa-exclamation-triangle"></i>
+                          We are getting your custom analytics from destne, please wait a moment....
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="panel panel-default">
+                  <div class="panel-heading"><i class="fa fa-pie-chart"></i> Egress Protocol Distribution</div>
+                    <div class="panel-body dataset" id="egress-protocol-distribution">
+                      <div id="egressProtocolChart" class='text-center'>
+                        <div class="alert alert-info">
+                          <p><i class="fa fa-exclamation-triangle"></i>
+                            We are getting your custom analytics from destne, please wait a moment....
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <!-- INGRESS TAB -->
+          <div role="tabpanel" class="tab-pane fade" id="ingress">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="panel panel-default">
+                  <div class="panel-heading"><i class="fa fa-table"></i> Ingress Application Summary</div>
+                  <div class="panel-body dataset" id="ingress-application-summary">
+                    <div id="ingressSummaryChart" class='text-center'>
+                      <div class="alert alert-info">
+                        <p><i class="fa fa-exclamation-triangle"></i>
+                          We are getting your custom analytics from destne, please wait a moment....
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="panel panel-default">
+                  <div class="panel-heading"><i class="fa fa-bar-chart"></i> Ingress Top Talkers</div>
+                  <div class="panel-body dataset" id="ingress-top-talkers">
+                    <div id="ingressTopTalkerChart" class='text-center'>
+                      <div class="alert alert-info">
+                        <p><i class="fa fa-exclamation-triangle"></i>
+                          We are getting your custom analytics from destne, please wait a moment....
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="panel panel-default">
+                  <div class="panel-heading"><i class="fa fa-line-chart"></i> Ingress Bytes per Hour</div>
+                  <div class="panel-body dataset" id="ingress-bytes-per-hour">
+                    <div id="ingressBPHChart" class='text-center'>
+                      <div class="alert alert-info">
+                        <p><i class="fa fa-exclamation-triangle"></i>
+                          We are getting your custom analytics from destne, please wait a moment....
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="panel panel-default">
+                  <div class="panel-heading"><i class="fa fa-pie-chart"></i> Ingress Protocol Distribution</div>
+                  <div class="panel-body dataset" id="ingress-protocol-distribution">
+                    <div id="ingressProtocolChart" class='text-center'>
+                      <div class="alert alert-info">
+                        <p><i class="fa fa-exclamation-triangle"></i>
+                          We are getting your custom analytics from destne, please wait a moment....
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- HELP TAB -->
+          <div role="tabpanel" class="tab-pane fade" id="help">
+            <h4><strong>Overview</strong></h4>
+            <p>This page provides live analytics from your configured network and will update periodically. The default
+            setting, unless changed by your administrator, is 10 minutes. The following is a short description of the graphs
+            and what some interpretations could be.</p>
+            <h5><em>Egress or Ingress?</em></h5>
+            <p>The Egress panel is reserved to show statistics from traffic that originates inside your network and is going out.
+            Examples of this are uploading images, establishing a remote connection, and sending information to a server. The Ingress
+            panel is reserved to show statistics from traffic that originates outside your network and is coming in. Examples of this
+            are loading webpages, downloading outside files, and streaming video.</p>
+            <h5><em>Protocol Charts</em></h5>
+            <p>The protocol chart shows the breakdown of the various network protocols within your network. Some of the most popular
+            protocols are as follows as well as some applications that use them:</p>
+            <ul>
+              <li>TCP: Loading webpages, downloading files</li>
+              <li>UDP: Streaming video, playing some video games, DNS</li>
+              <li>ICMP: Error reporting, ping requests, traceroute</li>
+            </ul>
+            <h5><em>Average Packet Size</em></h5>
+            <p>This chart simply shows the top packet sizes per application in bytes going through the network. Generally applications
+            that involve downloading files have larger packets while error reporting  packets are smaller in size.</p>
+            <h5><em>Application Summary</em></h5>
+            <p><strong>The y-axis is bytes on a log scale so something that is 1 tick below another is an order of magnitude smaller!</strong>
+            This chart simply shows the top applications that have sent the most bytes across your network in either direction.</p>
+            <h5><em>Top Talkers</em></h5>
+            <p><strong>The y-axis is bytes on a log scale so something that is 1 tick below another is an order of magnitude smaller!</strong>
+            This chart shows the IP Addresses that have sent the most traffic across your network. To resolve these network addresses, either
+            look them up in a table or ask your network administrator who is assigned that IP Address.</p>
+            <h5><em>Bytes Per Hour</em></h5>
+            <p><strong>The y-axis is bytes on a log scale so something that is 1 tick below another is an order of magnitude smaller!</strong>
+            This chart shows the amount of bytes that have went across your network in a given hour. These analytics are useful for finding
+            peak hours of traffic which can be correlated with the application summary to figure out what is bogging down your network.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <footer>
+    <% include ../partials/footer%>
+  </footer>
+
+  <!-- JS Files Required -->
+  <script src="/static/vendors/js/jquery-1.11.1.min.js"></script>
+  <script src="/static/vendors/js/bootstrap.min.js"></script>
+  <script src="/static/vendors/js/d3.min.js"></script>
+  <script src="/static/vendors/js/c3.min.js"></script>
+  <script src="/static/scripts/analysis.js"></script>
+</body>
+</html>

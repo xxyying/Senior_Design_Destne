@@ -1,0 +1,39 @@
+{
+    "curly"         : true,
+    "eqeqeq"        : true,
+    "latedef"       : false,
+    "maxerr"        : 50,
+    "noarg"         : true,
+    "nonbsp"        : true,
+    "undef"         : true,
+    "unused"        : true,
+
+    "asi"           : false,
+    "boss"          : false,
+    "debug"         : false,
+    "eqnull"        : true,
+
+    "evil"          : false,
+    "funcscope"     : false,
+    "lastsemic"     : false,
+    "laxbreak"      : false,
+    "laxcomma"      : false,
+    "loopfunc"      : false,
+    "multistr"      : false,
+    "noyield"       : false,
+    "notypeof"      : false,
+    "proto"         : false,
+    "scripturl"     : false,
+    "sub"           : false,
+    "supernew"      : false,
+    "validthis"     : false,
+
+    "browser"       : true,
+    "browserify"    : false,
+    "devel"         : true,
+    "jquery"        : true,
+    "node"          : true,
+    "nonstandard"   : false,
+
+    "globals"       : {}
+}

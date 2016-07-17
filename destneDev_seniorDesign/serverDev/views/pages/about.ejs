@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title><%= title %></title>
+    <link rel="icon" href="/static/images/favicon.ico" type="image/x-icon"/>
+  <!-- All the css that is required -->
+  <link rel="stylesheet" href="/static/vendors/stylesheets/font-awesome.css">
+  <link rel="stylesheet" href="/static/vendors/stylesheets/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="/static/styles/master.css">
+</head>
+
+<body>
+  <header>
+    <% include ../partials/header %>
+  </header>
+
+    <div class="jumbotron text-center">
+      <div class="container">
+        <h1>About</h1>
+      </div>
+    </div>
+
+    <div class="container">
+      <h2 class="text-center">destne v1.0</h2>
+      <div class="row" style="margin-bottom: 30px;">
+        <div class="col-md-4">
+          <h3>Benjamin Sealy</h3>
+          <p>bosealy@ncsu.edu</p>
+        </div>
+        <div class="col-md-4">
+          <h3>Bradford Ingersoll</h3>
+          <p>bingers@ncsu.edu</p>
+        </div>
+        <div class="col-md-4">
+          <h3>Edward Seidl</h3>
+          <p>eseidl@ncsu.edu</p>
+        </div>
+      </div>
+      <p>The first version of destne was completed in the spring of 2015 and was based mainly on PHP. It was
+        designed for a one sever to one client relationship and could service requests off of the Beaglebone
+        Black. Analaysis was done using pmaact on Cisco NetFlows and NBAR was used to categorize the
+        applications. Various graphs and data could be displayed to the end user such as:
+      </p>
+      <br>
+      <dl class="dl-horizontal">
+        <dt>Top Talkers</dt>
+        <dd>Displays the applications that have sent the most amount of bytes over the egress/ingress interfaces</dd>
+        <dt>Bytes per Hour</dt>
+        <dd>Shows the total number of bytes per hour being used for all applications on the egress/ingress interfaces</dd>
+        <dt>Protocol Distribution</dt>
+        <dd>Shows the protocol distribution across all interfaces (i.e. TCP, FTP, etc.)</dd>
+        <dt>Application Summary</dt>
+        <dd>Displays a description of applications going on the egress/ingress interfaces and the total number of bytes being used</dd>
+      </dl>
+      <hr>
+    </div>
+
+    <div class="container" style="margin-top: 40px; margin-bottom: 30px;">
+      <h2 class="text-center">destne v2.0</h2>
+      <div class="row" style="margin-bottom: 30px;">
+        <div class="col-md-2 col-md-offset-1">
+          <h3>Cecilia Yiying Liu</h3>
+          <p>yliu59@ncsu.edu</p>
+        </div>
+        <div class="col-md-2">
+          <h3>Corey Hewling</h3>
+          <p>cchewlin@ncsu.edu</p>
+        </div>
+        <div class="col-md-2">
+          <h3>John Hudson</h3>
+          <p>jdhudso2@ncsu.edu</p>
+        </div>
+        <div class="col-md-2">
+          <h3>Josh Leggett</h3>
+          <p>jhlegget@ncsu.edu</p>
+        </div>
+        <div class="col-md-2">
+          <h3>Mackenzie Dougherty</h3>
+          <p>mldoughe@ncsu.edu</p>
+        </div>
+      </div>
+      <p>The second version of destne is to be completed in spring of 2016 and will be based on Node.js and remove
+        the prior PHP dependence from code base. It will be designed with the idea of multiple clients being
+        serviced from one server which can run as a Virtual Machine or a deployable 1RU hardware server solution.
+        Some of the key differences between v1.0 and v2.0 are the following:
+      </p>
+      <br>
+      <dl class="dl-horizontal">
+        <dt>RESTful API</dt>
+        <dd>Designed to allow non-destne clients to interact with the server using stateless uniform HTTP requests to manipulate and retrieve data</dd>
+        <dt>Customizability</dt>
+        <dd>Optional customization allowed before deploying destne such as choosing desired data, user access/roles, and collection interfaces</dd>
+        <dt>Quicker Analaysis</dt>
+        <dd>Along with creating more analysis options, the analysis process will be optimized and run on more powerful hardware</dd>
+        <dt>Increased Security</dt>
+        <dd>Robust security utilizing HTTPS and token-based authentication for the API to prevent loss of information</dd>
+      </dl>
+    </div>
+
+  <footer>
+    <% include ../partials/footer%>
+  </footer>
+
+  <!-- JS Files Required -->
+  <script src="/static/vendors/js/jquery-1.11.1.min.js"></script>
+  <script src="/static/vendors/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+
+set_label=option          ip=176.122.10.1    sample_type=option
+!set_label=On-Net         ip=176.122.10.1    filter='dst net 176.122.0.0/16 or dst net 2.2.2.2/32'
+!set_label=Off-Net        ip=176.122.10.1    
+!set_tag=99               ip=176.122.10.1     filter='dst net 176.122.0.0/16 and src net 176.122.0.0/16'
+set_tag=99                ip=176.122.10.1     filter='ip and src net 176.122.0.0/16 and dst net 176.122.0.0/16'
+!set_tag=66                ip=176.122.10.1     filter='ip and not src net 176.122.0.0/16'

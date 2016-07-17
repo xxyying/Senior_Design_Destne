@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title><%= title %></title>
+  <link rel="icon" href="/static/images/favicon.ico" type="image/x-icon"/>
+  <!-- All the css that is required -->
+  <link rel="stylesheet" href="/static/vendors/stylesheets/font-awesome.min.css">
+  <link rel="stylesheet" href="/static/vendors/stylesheets/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="/static/styles/master.css">
+</head>
+
+<body>
+  <header>
+    <% include ../../partials/header %>
+  </header>
+
+<div class="jumbotron">
+	<div class="container">
+		<div class="row">
+			<h1>Wizard <i class="fa fa-bolt"></i></h1>
+		</div>
+	</div>
+</div>
+
+
+<div class="container">
+  <p class="lead">Congratulations! </p>
+  <p> You have finished with the setup wizard, please proceed to the Home page using the
+    links above.
+  </p>
+</div>
+
+<footer>
+	<% include ../../partials/footer%>
+</footer>
+
+<!-- JS Files Required -->
+<script src="/static/vendors/js/jquery-1.11.1.min.js"></script>
+<script src="/static/vendors/js/bootstrap.min.js"></script>
+</body>
+</html>

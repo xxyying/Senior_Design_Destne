@@ -1,0 +1,9 @@
+conf/settings.json
+conf/server.pem
+conf/server.enc.pem
+conf/server.crt
+pmacct/*.pid*
+pmacct/*.log
+*~
+node_modules
+../npm-debug.log

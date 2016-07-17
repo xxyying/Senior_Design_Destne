@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title><%= title %></title>
+  <link rel="icon" href="/static/images/favicon.ico" type="image/x-icon"/>
+	<!-- All the css that is required -->
+	<link rel="stylesheet" href="/static/vendors/stylesheets/font-awesome.css">
+	<link rel="stylesheet" href="/static/vendors/stylesheets/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="/static/styles/master.css">
+</head>
+
+<body>
+	<header>
+		<% include ../../partials/header %>
+	</header>
+
+	<div class="jumbotron">
+		<div class="container">
+			<div class="row">
+				<h1>Wizard <i class="fa fa-bolt"></i></h1>
+				<h2>Guardian Configuration</h2>
+			</div>
+		</div>
+	</div>
+
+	<div class="container">
+    <div class="panel panel-default">
+      <div class="panel-heading panel-heading-tabbed">
+        <ul class="nav nav-tabs panel-tabs panel-title">
+          <li role="presentation" class="active">
+            <a href="#select_guardian" aria-controls="select_guardian" role="tab" data-toggle="tab"><i class="fa fa-users"></i> Select Guardian</a>
+          </li>
+          <li role="presentation">
+            <a href="#guardian_help" aria-controls="guardian_help" role="tab" data-toggle="tab"><i class="fa fa-question-circle"></i> Help</a>
+          </li>
+        </ul>
+      </div>
+      <div class="panel-body">
+        <!-- Select Guardian Tab -->
+        <div class="tab-content">
+
+          <div role="tabpanel" class="tab-pane active" id="select_guardian">
+            <div class="alert alert-warning" id="userAlert" role="alert" style="display: none;">
+              <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+              No guardians found!
+            </div>
+						<div style="overflow-x: auto;">
+	            <table class="table table-hover" id="userTable">
+	              <tr class="active">
+	                <th>User ID</th>
+	                <th>Username</th>
+	                <th>Realname</th>
+	                <th>Email</th>
+	                <th>Roles</th>
+	                <th></th>
+	              </tr>
+	            </table>
+						</div>
+            <p class="text-center"><button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#add"><i class="fa fa-user-plus"></i> Add Guardian</button></p>
+          </div>
+
+          <!-- Help Tab -->
+          <div role="tabpanel" class="tab-pane" id="guardian_help">
+            <h4><strong>Overview</strong></h4>
+            <p>On this page an administrator can view all the users that have access to the
+              system. Their unique User ID, username, and roles are displayed as well as their realname,
+              and email if provided. Admins also have the ability to delete said users and be taken to
+              their profile page for editing.</p>
+
+            <p>An administrator can also add new users as long as certain requirements are met which
+              are listed below </p>
+            <h4><strong>Requirements</strong></h4>
+            <h5><i>Username</i></h5>
+            <ul>
+              <li>Valid Characters - Numbers and English Letters are the only characters allowed</li>
+              <li>Length - Usernames cannot be longer than 100 characters</li>
+              <li>Spacing - No spaces are allowed at any point in the username</li>
+              <li>Unique - All usernames must be unique within the system, no duplicates</li>
+            </ul>
+            <h5><i>Password</i></h5>
+            <ul>
+              <li>Valid Characters - All characters are allowed within a password</li>
+              <li>Length - Passwords must be within 10 - 128 characters in length</li>
+              <li>Format - Passwords cannot have three of the same character in a row (i.e. 'aaa'), and
+                must have one uppercase, lowercase, special character, and number in it
+              <li>Passphrase - If a password is longer than 20 characters it does not have to meet the format requirements</li>
+            </ul>
+            <h5><i>Real Name</i></h5>
+            <ul>
+              <li>Valid Characters - Letters and dashes (-) only</li>
+              <li>Length - Each part of the name cannot be longer than 45 characters</li>
+              <li>Parts Required - If a name is entered, both the first and last name are required</li>
+            </ul>
+            <h5><i>Email</i></h5>
+            <ul>
+              <li>Valid Email Format - Most standard email formats are allowed, however if yours does not work contact an administrator</li>
+              <li>Length - An email cannot be longer than 100 characters</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Delete guardian modal -->
+  <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="deleteLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Delete <b id="delete-guardian-name"></b> from Destne?</h4>
+        </div>
+        <div class="modal-body">
+          <div class="alert alert-danger">
+            <p class="text-center"><i class="fa fa-exclamation-circle"></i> <b>WARNING</b></p>
+            <p class="text-center"> This action cannot be undone.</p>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+          <button type="button" id="delete-guardian-confirm" class="btn btn-danger">Confirm Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Add guardian modal -->
+  <div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="addLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Add Guardians to destne</h4>
+        </div>
+        <div class="modal-body">
+          <div id="addGuardianInfo" class="alert" style="display: none;">
+          </div>
+          <div>
+              <!-- REQUIRED FIELDS -->
+              <ul class="list-unstyled">
+                <form role="form" id="addGuardianForm">
+                  <li>
+                    <p class="text-muted text-left">REQUIRED FIELDS</p>
+                  </li>
+                  <li>
+                    <div class="form-group has-feedback">
+                      <label class="control-label" for="guardianUsername">Username</label>
+                      <input type="text" class="form-control" id="guardianUsername" name="guardianUsername">
+                    </div>
+                    <div class="row">
+                      <div class="col-xs-6 form-group has-feedback">
+                        <label class="control-label" for="guardianPassword">Password</label>
+                        <input type="password" class="form-control" id="guardianPassword" name="guardianPassword">
+                      </div>
+                      <div class="col-xs-6 form-group has-feedback">
+                        <label class="control-label" for="guardianPassword2">Repeat Password</label>
+                        <input type="password" class="form-control" id="guardianPassword2" name="guardianPassword2">
+                      </div>
+                    </div>
+                  </li>
+                  <hr>
+                  <br>
+                  <li>
+                    <p class="text-muted text-left">OPTIONAL FIELDS</p>
+                  </li>
+                  <li>
+                    <div class="row">
+                      <div class="col-xs-6 form-group has-feedback">
+                        <label class="control-label" for="guardianFirstname">First Name</label>
+                        <input type="text" class="form-control nameGroup" id="guardianFirstname" name="guardianFirstname">
+                      </div>
+                      <div class="col-xs-6 form-group has-feedback">
+                        <label class="control-label" for="guardianLastname">Last Name</label>
+                        <input type="text" class="form-control nameGroup" id="guardianLastname" name="guardianLastname">
+                      </div>
+                    </div>
+                    <div class="form-group has-feedback">
+                      <label class="control-label" for="guardianEmail">Email</label>
+                      <input type="text" class="form-control" id="guardianEmail" name="guardianEmail">
+                    </div>
+                  </li>
+                  <br>
+                  <br>
+                  <li>
+                    <p class="text-center">
+                      <button type="reset" id="guardianReset" name="guardianReset" class="btn btn-default btn-lg">
+                        <i class="fa fa-undo"></i> Reset
+                      </button>
+                      <button type="submit" id="guardianSave" name="guardianSave" class="btn btn-primary btn-lg btn btn-success">
+                        <i class="fa fa-user-plus"></i> Add Guardian
+                      </button>
+                    </p>
+                  </li>
+                </form>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+		<div class="container">
+			<a href="/wizard/start" class="btn btn-lg btn-default pull-left"><i class="fa fa-arrow-circle-left"></i> Go Back</a>
+			<a href="/wizard/router" class="btn btn-lg btn-success pull-right">Continue <i class="fa fa-arrow-circle-right"></i></a>
+		</div>
+
+<footer>
+	<% include ../../partials/footer%>
+</footer>
+
+<!-- JS Files Required -->
+<script src="/static/vendors/js/jquery-1.11.1.min.js"></script>
+<script src="/static/vendors/js/jquery.validate.min.js"></script>
+<script src="/static/vendors/js/additional-methods.min.js"></script>
+<script src="/static/vendors/js/bootstrap.min.js"></script>
+<script src="/static/scripts/Wizard/guardian.js"></script>
+</body>
+</html>
